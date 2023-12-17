@@ -1,9 +1,13 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'state.dart';
 
 class ProductDetailsCubit extends Cubit<ProductDetailsState> {
   ProductDetailsCubit() : super(ProductDetailsInitial());
+
+  // Creating a PageController instance with initialPage set to 1 and viewportFraction set to 0.8 for controlling a page-based view.
+  var pageController = PageController(initialPage: 1, viewportFraction: 0.8);
 
   // Track the currently selected image index
   int selectedImageIndex = 0;

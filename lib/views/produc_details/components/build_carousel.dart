@@ -23,10 +23,10 @@ class BuildCarousel extends StatelessWidget {
     return AnimatedBuilder(
       animation: pageController,
       builder: (context, child) {
-        double value = 6.0;
+        double value = 0;
         if (pageController.position.haveDimensions) {
           value = index.toDouble() - (pageController.page ?? 0);
-          value = (value * 0.1).clamp(-1, 1);
+          value = (value * 0.12).clamp(-1, 1);
         }
         return Transform.rotate(
           angle: pi * value,

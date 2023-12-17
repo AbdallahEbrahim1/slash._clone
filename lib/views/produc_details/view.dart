@@ -28,15 +28,17 @@ class ProductDetailsView extends StatefulWidget {
 
 class _ProductDetailsViewState extends State<ProductDetailsView> {
   @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(microseconds: 1), () {
+      context.read<ProductDetailsCubit>().pageController.jumpToPage(0);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    int initialPage = 0;
-
-    var pageController =
-        PageController(initialPage: initialPage, viewportFraction: 0.8);
-
     return BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
       builder: (BuildContext context, state) {
-        // var productCubit = BlocProvider.of<ProductDetailsCubit>(context);
         var productCubit = context.read<ProductDetailsCubit>();
         return Scaffold(
           appBar: CustomAppBar(title: "Product Details"),
@@ -54,10 +56,10 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                         .variations[productCubit.selectedColorIndex]
                         .productVarientImages
                         .length,
-                    controller: pageController,
+                    controller: productCubit.pageController,
                     itemBuilder: (context, index) {
                       return BuildCarousel(
-                          pageController: pageController,
+                          pageController: productCubit.pageController,
                           image: products[widget.productId]
                               .variations[productCubit.selectedColorIndex]
                               .productVarientImages[index],
@@ -71,7 +73,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   BuildVariantImages(
-                    pageController: pageController,
+                    pageController: productCubit.pageController,
                     images: products[widget.productId]
                         .variations[productCubit.selectedColorIndex]
                         .productVarientImages,
