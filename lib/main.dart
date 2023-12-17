@@ -6,6 +6,9 @@ import 'package:slash_detailview/views/splash/view.dart';
 
 import 'helper/helper_methods.dart';
 
+/// This App State Management use bloc(cubit).
+/// APP Files Contains 1-components - 2-helper - 3-models - 4-views
+
 void main() async {
   runApp(const MyApp());
 }
